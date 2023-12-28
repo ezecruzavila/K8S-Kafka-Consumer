@@ -1,6 +1,7 @@
 package org.example.challenge.utils
 
 import io.fabric8.kubernetes.api.model.Pod
+import org.apache.kafka.common.errors.SerializationException
 import org.json.JSONException
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertThrows
@@ -19,7 +20,7 @@ class MessageDeserializerTest {
     @Test
     fun `deserialize should throw SerializationException for invalid JSON data`() {
         val invalidData = "invalidJsonData".toByteArray()
-        assertThrows(JSONException::class.java) {
+        assertThrows(SerializationException::class.java) {
             deserializer.deserialize("topic", invalidData)
         }
     }
@@ -38,5 +39,30 @@ class MessageDeserializerTest {
         val result = deserializer.deserialize("topic", k8sData)
 
         assertEquals(Pod::class.java, result?.javaClass)
+    }
+
+    @Test
+    fun `deserialize should throw SerializationException for non valid K8S resource`(){
+        val kind = K8SApplicationType.POD.value
+        var k8sData = """
+            {
+              "kind": "$kind",      
+            }
+            
+        """.trimIndent().toByteArray()
+
+        assertThrows(SerializationException::class.java) {
+            deserializer.deserialize("topic", k8sData)
+        }
+
+        k8sData = """
+            {
+              "metatada": "$kind",      
+            }
+        """.trimIndent().toByteArray()
+
+        assertThrows(SerializationException::class.java) {
+            deserializer.deserialize("topic", k8sData)
+        }
     }
 }

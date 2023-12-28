@@ -24,12 +24,12 @@ class MessageDeserializer : Deserializer<Any?> {
             // Here I would check the json for any prop that would let me know what kind of message it is
             return when {
                 isK8SResource(jsonObject) -> deserializeAsK8SResource(data)
-                isAWSLambdaResource(jsonObject) -> deserializeAsAWSLambda(data)
+               // isAWSLambdaResource(jsonObject) -> deserializeAsAWSLambda(data)
                 else -> {
                     throw SerializationException("Message doesn't match any specification")
                 }
             }
-        } catch (e: DatabindException) {
+        } catch (e: Exception) {
             throw SerializationException("Error when deserializing kafka message into class")
         }
     }
@@ -43,7 +43,7 @@ class MessageDeserializer : Deserializer<Any?> {
 
     private fun isK8SResource(json: JSONObject): Boolean {
         //This could be a simpler check if the message format is known and expected
-        return json.has("kind") && json.has("apiVersion") && json.has("metadata")
+        return json.has("kind") && json.has("metadata")
     }
 
     private fun deserializeAsK8SResource(data: ByteArray): HasMetadata {
@@ -55,6 +55,7 @@ class MessageDeserializer : Deserializer<Any?> {
 
     }
 
+    /*
     private fun isAWSLambdaResource(json: JSONObject): Boolean {
         // Here I would check for anything that lets me know it's an AWS Lambda
         return false
@@ -64,4 +65,5 @@ class MessageDeserializer : Deserializer<Any?> {
         // Here I would deserialize the JSON into some AWS Lambda object
         return Any()
     }
+    */
 }
