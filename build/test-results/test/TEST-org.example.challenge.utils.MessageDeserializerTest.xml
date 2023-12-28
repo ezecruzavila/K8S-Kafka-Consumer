@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.example.challenge.utils.MessageDeserializerTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2023-12-28T09:46:48" hostname="Ezequiels-MacBook-Pro.local" time="0.811">
+  <properties/>
+  <testcase name="deserialize should return null for null data()" classname="org.example.challenge.utils.MessageDeserializerTest" time="0.002"/>
+  <testcase name="deserialize should throw SerializationException for invalid JSON data()" classname="org.example.challenge.utils.MessageDeserializerTest" time="0.01"/>
+  <testcase name="deserialize should return K8S resource for valid K8S JSON data()" classname="org.example.challenge.utils.MessageDeserializerTest" time="0.798"/>
+  <system-out><![CDATA[2023-12-28 06:46:48.361  INFO 99941 --- [    Test worker] o.e.challenge.utils.MessageDeserializer  : Null received at deserializing
+2023-12-28 06:46:48.367  INFO 99941 --- [    Test worker] o.e.challenge.utils.MessageDeserializer  : Deserializing message...
+2023-12-28 06:46:48.367  INFO 99941 --- [    Test worker] o.e.challenge.utils.MessageDeserializer  : Deserializing message as K8S Resource...
+2023-12-28 06:46:48.380  INFO 99941 --- [    Test worker] o.e.challenge.utils.MessageDeserializer  : Deserializing message...
+2023-12-28 06:46:48.380  INFO 99941 --- [    Test worker] o.e.challenge.utils.MessageDeserializer  : Deserializing message as K8S Resource...
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

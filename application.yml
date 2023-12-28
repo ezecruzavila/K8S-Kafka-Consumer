@@ -1,0 +1,39 @@
+kafka:
+  bootstrapAddress: kafka:9092
+  topic: k8s-resources
+  group-id: group_id
+spring:
+  kafka:
+    producer:
+      bootstrap-servers: kafka:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      group-id: group_id
+    consumer:
+      bootstrap-servers: kafka:9092
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.example.challenge.utils.MessageDeserializer
+       # In case of knowing that all message are coming from K8S, maybe because for scalability the K8S consumer has
+       # a dedicated own app, this would help reduce the code boilerplate
+
+      #properties:
+       # spring:
+       #   json:
+       #     value:
+       #       default:
+       #        type: io.fabric8.kubernetes.api.model.HasMetadata
+       #   trusted:
+       #     packages: org.example.challenge.*
+
+      group-id: group_id
+      auto-offset-reset: earliest
+  datasource:
+    url: jdbc:postgresql://postgres:5432/challenge
+    username: challenge
+    password: C7SQKr@g6SwtXNi
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect

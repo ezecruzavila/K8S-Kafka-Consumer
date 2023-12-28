@@ -1,0 +1,66 @@
+x-postgres-config:
+  &env_postgres
+  POSTGRES_PASSWORD: C7SQKr@g6SwtXNi
+  POSTGRES_DATABASE: challenge
+  POSTGRES_USERNAME: challenge
+
+x-env-kafka:
+  &env_kafka
+  KAFKA_CFG_NODE_ID: 0
+  KAFKA_BROKER_ADDRESS: kafka:9092
+  KAFKA_CFG_ADVERTISED_LISTENERS: PLAINTEXT://:9092
+  KAFKA_CFG_PROCESS_ROLES: broker,controller
+  KAFKA_CFG_CONTROLLER_LISTENER_NAMES: CONTROLLER
+  KAFKA_CFG_LISTENERS: PLAINTEXT://:9092,CONTROLLER://:9093
+  KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
+  KAFKA_CFG_CONTROLLER_QUORUM_VOTERS: 0@127.0.0.1:9093
+
+services:
+  challenge:
+    image: gradle:jdk18
+    hostname: challenge
+    working_dir: /usr/src/app
+    volumes: [ .:/usr/src/app ]
+    command: gradle run
+    mem_limit: 4096MB
+    ports: [ '8080:8080' ]
+    networks: [ myNet ]
+    depends_on: [ kafka ]
+    environment:
+      APP_NAME: kotlin-challenge
+      <<: [ *env_postgres, *env_kafka ]
+
+  postgres:
+    image: bitnami/postgresql:14.7.0
+    hostname: postgres
+    restart: always
+    ports: [ '5432:5432' ]
+    networks: [ myNet ]
+    environment:
+      <<: *env_postgres
+
+  kafka:
+    image: bitnami/kafka:3.3.2
+    hostname: kafka
+    restart: always
+    ports: [ '9092:9092' ]
+    networks: [ myNet ]
+    environment:
+      <<: *env_kafka
+
+  kafkasetup:
+    image: aambertin/kafka-cli:3.3.1
+    volumes:
+      - ./setup.sh:/setup.sh
+      - ./messages:/messages
+    networks: [ myNet ]
+    entrypoint: sh -c "/setup.sh"
+    depends_on:
+      kafka:
+        condition: service_started
+    environment:
+      <<: *env_kafka
+
+networks:
+  myNet:
+    name: myNet

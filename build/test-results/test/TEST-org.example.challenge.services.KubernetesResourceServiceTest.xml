@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.example.challenge.services.KubernetesResourceServiceTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2023-12-28T09:46:48" hostname="Ezequiels-MacBook-Pro.local" time="0.09">
+  <properties/>
+  <testcase name="save should call repository save()" classname="org.example.challenge.services.KubernetesResourceServiceTest" time="0.087"/>
+  <testcase name="save should return the saved resource()" classname="org.example.challenge.services.KubernetesResourceServiceTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
