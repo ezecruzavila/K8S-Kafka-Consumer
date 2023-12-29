@@ -1,6 +1,5 @@
 package org.example.challenge.utils
 
-import com.fasterxml.jackson.databind.DatabindException
 import com.fasterxml.jackson.databind.ObjectMapper
 import io.fabric8.kubernetes.api.model.HasMetadata
 import mu.KotlinLogging
@@ -8,7 +7,7 @@ import org.apache.kafka.common.errors.SerializationException
 import org.apache.kafka.common.serialization.Deserializer
 import org.json.JSONObject
 
-
+// For a better abstraction, the Deserializer should be Deserializer<Payload> where Payload stores the important information
 class MessageDeserializer : Deserializer<Any?> {
     private val logger = KotlinLogging.logger {}
     private val objectMapper = ObjectMapper()
@@ -24,7 +23,7 @@ class MessageDeserializer : Deserializer<Any?> {
             // Here I would check the json for any prop that would let me know what kind of message it is
             return when {
                 isK8SResource(jsonObject) -> deserializeAsK8SResource(data)
-               // isAWSLambdaResource(jsonObject) -> deserializeAsAWSLambda(data)
+                // isAWSLambdaResource(jsonObject) -> deserializeAsAWSLambda(data)
                 else -> {
                     throw SerializationException("Message doesn't match any specification")
                 }

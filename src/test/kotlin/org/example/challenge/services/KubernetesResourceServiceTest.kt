@@ -10,14 +10,12 @@ import org.example.challenge.repositories.KubernetesResourceRepository
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import java.util.*
-import javax.transaction.Transactional
-import kotlin.collections.HashMap
 
 
 class KubernetesResourceServiceTest {
 
     private val repository: KubernetesResourceRepository = mockk()
-    private val service= KubernetesResourceService(repository)
+    private val service = KubernetesResourceService(repository)
 
     @Test
     fun `test save owner and children resource, invokes repository 3 times`() {
@@ -56,8 +54,8 @@ class KubernetesResourceServiceTest {
         resourceChildren.metadata.uid = "uid2"
         resourceChildren.metadata.name = "name2"
         resourceChildren.spec = ServiceSpec()
-        resourceChildren.spec.selector = HashMap<String,String>()
-        resourceChildren.spec.selector.put("name",resourceOwner.metadata.name)
+        resourceChildren.spec.selector = HashMap<String, String>()
+        resourceChildren.spec.selector.put("name", resourceOwner.metadata.name)
         mockk<KubernetesResource>()
         every { repository.save(any()) } returns KubernetesResource(resourceOwner)
         service.save(resourceOwner)

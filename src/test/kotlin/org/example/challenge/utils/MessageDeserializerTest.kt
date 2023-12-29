@@ -2,7 +2,6 @@ package org.example.challenge.utils
 
 import io.fabric8.kubernetes.api.model.Pod
 import org.apache.kafka.common.errors.SerializationException
-import org.json.JSONException
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Test
@@ -42,7 +41,7 @@ class MessageDeserializerTest {
     }
 
     @Test
-    fun `deserialize should throw SerializationException for non valid K8S resource`(){
+    fun `deserialize should throw SerializationException for non valid K8S resource`() {
         val kind = K8SApplicationType.POD.value
         var k8sData = """
             {
