@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository
 @Repository
 interface KubernetesResourceRepository : CrudRepository<KubernetesResource, String> {
 
-
     @Query("SELECT a FROM KubernetesResource a")
     override fun findAll(): List<KubernetesResource>
 

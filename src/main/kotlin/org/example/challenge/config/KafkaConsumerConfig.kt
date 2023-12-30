@@ -29,15 +29,6 @@ class KafkaConsumerConfig {
     @Value(value = "\${kafka.groupId}")
     private lateinit var groupId: String
 
-    @Value(value = "\${kafka.backoff.interval}")
-    private var interval = 0L
-
-    @Value(value = "\${kafka.backoff.retries}")
-    private var retries = 0L
-
-    @Value(value = "\${kafka.threads}")
-    private var threads = 1
-
     private val logger = KotlinLogging.logger {}
 
     @Bean
@@ -54,7 +45,7 @@ class KafkaConsumerConfig {
 
     @Bean
     fun errorHandler(): DefaultErrorHandler {
-        val fixedBackOff: BackOff = FixedBackOff(interval, retries)
+        val fixedBackOff: BackOff = FixedBackOff(1000L, 9)
         val errorHandler = DefaultErrorHandler({ record, exception ->
             logger.warn { "Exception: $exception" }
             logger.info { "Recovered: $record" }
@@ -71,7 +62,7 @@ class KafkaConsumerConfig {
         factory.containerProperties.setAckMode(ContainerProperties.AckMode.MANUAL)
         factory.setCommonErrorHandler(errorHandler())
         factory.afterPropertiesSet()
-        factory.setConcurrency(threads)
+        factory.setConcurrency(3)
         factory.consumerFactory = consumerFactory()
         return factory
     }

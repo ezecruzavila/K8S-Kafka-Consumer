@@ -1,9 +1,15 @@
+kafka:
+  bootstrapAddress: localhost:9092
+  topic: k8s-resources-test
+  groupId: k8s-test
+
 spring:
   datasource:
-    url: jdbc:h2:mem:postgres-test
-    driver-class-name: org.h2.Driver
-    username: test
-    password:
-  h2:
-    console:
-      enabled: true
+    url: jdbc:h2:mem:test_db
+    driverClassName: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect

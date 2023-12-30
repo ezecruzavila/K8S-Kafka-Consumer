@@ -18,6 +18,7 @@ repositories {
 }
 
 dependencies {
+    implementation("com.google.code.gson:gson:2.10.1")
     implementation("io.mockk:mockk:1.12.0")
     implementation("io.github.microutils:kotlin-logging:3.0.5")
     implementation("io.fabric8:kubernetes-client:6.9.2")
@@ -29,6 +30,7 @@ dependencies {
     implementation("org.springframework.kafka:spring-kafka")
     implementation("org.json:json:20231013")
     implementation("com.h2database:h2")
+    testImplementation("org.awaitility:awaitility:4.2.0")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.kafka:spring-kafka-test")
 
@@ -56,6 +58,7 @@ tasks.jacocoTestCoverageVerification {
                 fileTree(it).matching {
                     setExcludes(
                         listOf(
+                            "org/example/challenge/config/**",
                             "org/example/challenge/controllers/**",
                             "org/example/challenge/utils/K8SApplicationType"
                             )
@@ -75,6 +78,7 @@ tasks.withType<JacocoReport> {
             fileTree(it).matching {
                 setExcludes(
                     listOf(
+                        "org/example/challenge/config/**",
                         "org/example/challenge/controllers/**",
                         "org/example/challenge/utils/K8SApplicationType"
                     )

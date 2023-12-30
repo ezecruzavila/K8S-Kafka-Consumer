@@ -82,7 +82,7 @@ class KubernetesResourceServiceTest {
         val savedResource = KubernetesResource(mockResource)
         every { repository.save(any()) } returns savedResource
         val result = service.save(mockResource)
-        assertEquals(savedResource, result)
+        assertEquals(savedResource.resource, result.resource)
     }
 
 

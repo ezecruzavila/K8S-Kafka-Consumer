@@ -1,4 +1,4 @@
-package org.example.challenge
+package org.example.challenge.consumers
 
 import io.fabric8.kubernetes.api.model.HasMetadata
 import mu.KotlinLogging

@@ -1,11 +1,7 @@
 kafka:
   bootstrapAddress: kafka:9092
   topic: k8s-resources
-  groupId: challenge
-  threads: 3
-  backoff:
-    interval: 1000
-    maxAttempts: 10
+  groupId: k8s
 spring:
   datasource:
     url: jdbc:postgresql://postgres:5432/challenge

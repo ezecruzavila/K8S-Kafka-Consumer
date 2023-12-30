@@ -1,3 +1,6 @@
+## Resilience
+I chose a `limited non-blocking retry policy` and a `DLT topic` but there are many other options.
+
 ## Scalability & Performance
 For scalability the app could be broke down into microservices, splitting the topic consumer and the DB access
 In this case, for data synchronization, keeping an eye on the offset of the topic would be crucial.
