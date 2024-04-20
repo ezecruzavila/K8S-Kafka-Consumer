@@ -1,2 +1,2 @@
-rootProject.name = "kotlin-senior-challenge"
+rootProject.name = "kafka-k8s-consumer"
 

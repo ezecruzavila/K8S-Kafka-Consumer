@@ -1,8 +1,8 @@
 x-postgres-config:
   &env_postgres
   POSTGRES_PASSWORD: C7SQKr@g6SwtXNi
-  POSTGRES_DATABASE: challenge
-  POSTGRES_USERNAME: challenge
+  POSTGRES_DATABASE: k8s-messages
+  POSTGRES_USERNAME: k8s-messages
 
 x-env-kafka:
   &env_kafka
@@ -16,9 +16,9 @@ x-env-kafka:
   KAFKA_CFG_CONTROLLER_QUORUM_VOTERS: 0@127.0.0.1:9093
 
 services:
-  challenge:
+  k8s-messages:
     image: gradle:jdk18
-    hostname: challenge
+    hostname: k8s-messages
     working_dir: /usr/src/app
     volumes: [ .:/usr/src/app ]
     command: gradle run
@@ -27,7 +27,7 @@ services:
     networks: [ myNet ]
     depends_on: [ kafka ]
     environment:
-      APP_NAME: kotlin-challenge
+      APP_NAME: kafka-k8s-consumer
       <<: [ *env_postgres, *env_kafka ]
 
   postgres:

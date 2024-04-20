@@ -10,7 +10,7 @@ plugins {
     application
 }
 
-group = "org.example.challenge"
+group = "org.example.k8s_kafka_consumer"
 version = "0.0.1-SNAPSHOT"
 
 repositories {
@@ -48,7 +48,7 @@ tasks.withType<Test> {
 }
 
 application {
-    mainClass.set("org.example.challenge.ApplicationKt")
+    mainClass.set("org.example.k8s_kafka_consumer.ApplicationKt")
 }
 
 tasks.jacocoTestCoverageVerification {
@@ -58,9 +58,9 @@ tasks.jacocoTestCoverageVerification {
                 fileTree(it).matching {
                     setExcludes(
                         listOf(
-                            "org/example/challenge/config/**",
-                            "org/example/challenge/controllers/**",
-                            "org/example/challenge/utils/K8SApplicationType"
+                            "org/example/k8s_kafka_consumer/config/**",
+                            "org/example/k8s_kafka_consumer/controllers/**",
+                            "org/example/k8s_kafka_consumer/utils/K8SApplicationType"
                             )
                         )
                     }
@@ -78,9 +78,9 @@ tasks.withType<JacocoReport> {
             fileTree(it).matching {
                 setExcludes(
                     listOf(
-                        "org/example/challenge/config/**",
-                        "org/example/challenge/controllers/**",
-                        "org/example/challenge/utils/K8SApplicationType"
+                        "org/example/k8s_kafka_consumer/config/**",
+                        "org/example/k8s_kafka_consumer/controllers/**",
+                        "org/example/k8s_kafka_consumer/utils/K8SApplicationType"
                     )
                 )
             }

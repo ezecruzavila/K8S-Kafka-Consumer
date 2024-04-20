@@ -3,13 +3,13 @@
 /.idea/compiler.xml
 /.idea/git_toolbox_prj.xml
 /.idea/GitLink.xml
-/Challenge/.idea/GitLink.xml
+/kafka-k8s-consumer/.idea/GitLink.xml
 /.idea/gradle.xml
 /.idea/jarRepositories.xml
 /.idea/kotlinc.xml
 /.idea/misc.xml
 /.idea/vcs.xml
-/Challenge/.idea/vcs.xml
-/Challenge/.idea/workspace.xml
+/kafka-k8s-consumer/.idea/vcs.xml
+/kafka-k8s-consumer/.idea/workspace.xml
 /.idea/.gitignore
 /.idea/.name

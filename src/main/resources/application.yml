@@ -4,8 +4,8 @@ kafka:
   groupId: k8s
 spring:
   datasource:
-    url: jdbc:postgresql://postgres:5432/challenge
-    username: challenge
+    url: jdbc:postgresql://postgres:5432/k8s-messages
+    username: k8s-messages
     password: C7SQKr@g6SwtXNi
   jpa:
     hibernate:
